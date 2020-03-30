@@ -1,0 +1,8 @@
+prefix=/home/yusseff/TienditaDelCampo/devel
+
+Name: robot_tiendi
+Description: Description of robot_tiendi
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/yusseff/TienditaDelCampo/devel/lib 
+Requires: 

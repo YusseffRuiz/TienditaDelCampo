@@ -1,0 +1,8 @@
+prefix=/home/yusseff/TienditaDelCampo/install
+
+Name: robot_tiendita
+Description: Description of robot_tiendita
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/yusseff/TienditaDelCampo/install/lib 
+Requires: 

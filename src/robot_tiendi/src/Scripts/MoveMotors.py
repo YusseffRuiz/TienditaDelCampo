@@ -22,9 +22,9 @@ class MoveMotors:
  #       rospy.init_node("move_motors", anonymous=True)
         # Publisher which will publish to the topic '/cmd_vel'.
         self.mode = GPIO.getmode()
-        self.LeftMotorP = 26
+        self.LeftMotorN = 26
         self.pwmL = 13
-        self.LeftMotorN = 19
+        self.LeftMotorP = 19
         self.RightMotorP = 20
         self.pwmR = 21
         self.RightMotorN = 16
@@ -42,8 +42,8 @@ class MoveMotors:
 
         self.MotorLeftSpeed = GPIO.PWM(self.pwmL, 100)
         self.MotorRightSpeed = GPIO.PWM(self.pwmR, 100)
-        self.MotorLeftSpeed.start(1)
-        self.MotorRightSpeed.start(1)
+        self.MotorLeftSpeed.start(0)
+        self.MotorRightSpeed.start(0)
   #      rospy.loginfo("GPIOs cleaned and assigned")
 
     def set(self, direction, value):
@@ -81,10 +81,12 @@ if __name__ == "__main__":
     try:
 	x = MoveMotors()
 	x.forward()
+	time.sleep(4)
+	x.set('L', 70)
+	x.set('R', 70)
 	while(True):
+	   time.sleep(1)
            # x.forward()
-            x.set('L', 50)
-	    x.set('R', 50)
 	#x.stopMotors()
     except KeyboardInterrupt:
 	x.stopMotors()

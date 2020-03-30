@@ -1,8 +1,8 @@
-prefix=/home/yusseff/TienditaDelCampo/install
+prefix=/home/pi/DelivererRobot/install
 
 Name: robot_tiendi
 Description: Description of robot_tiendi
 Version: 0.0.0
 Cflags: 
-Libs: -L/home/yusseff/TienditaDelCampo/install/lib 
+Libs: -L${prefix}/lib 
 Requires: 

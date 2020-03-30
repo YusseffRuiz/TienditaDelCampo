@@ -1,8 +1,8 @@
-# Install script for directory: /home/yusseff/TienditaDelCampo/src/robot_tiendi
+# Install script for directory: /home/pi/DelivererRobot/src/robot_tiendi
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/yusseff/TienditaDelCampo/install")
+  set(CMAKE_INSTALL_PREFIX "/home/pi/DelivererRobot/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -32,23 +32,18 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
   set(CMAKE_INSTALL_SO_NO_EXE "1")
 endif()
 
-# Is this installation the result of a crosscompile?
-if(NOT DEFINED CMAKE_CROSSCOMPILING)
-  set(CMAKE_CROSSCOMPILING "FALSE")
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/pi/DelivererRobot/build/robot_tiendi/catkin_generated/installspace/robot_tiendi.pc")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/yusseff/TienditaDelCampo/build/robot_tiendi/catkin_generated/installspace/robot_tiendi.pc")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_tiendi/cmake" TYPE FILE FILES
-    "/home/yusseff/TienditaDelCampo/build/robot_tiendi/catkin_generated/installspace/robot_tiendiConfig.cmake"
-    "/home/yusseff/TienditaDelCampo/build/robot_tiendi/catkin_generated/installspace/robot_tiendiConfig-version.cmake"
+    "/home/pi/DelivererRobot/build/robot_tiendi/catkin_generated/installspace/robot_tiendiConfig.cmake"
+    "/home/pi/DelivererRobot/build/robot_tiendi/catkin_generated/installspace/robot_tiendiConfig-version.cmake"
     )
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_tiendi" TYPE FILE FILES "/home/yusseff/TienditaDelCampo/src/robot_tiendi/package.xml")
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_tiendi" TYPE FILE FILES "/home/pi/DelivererRobot/src/robot_tiendi/package.xml")
 endif()
 

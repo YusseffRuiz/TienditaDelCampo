@@ -22,7 +22,6 @@ class MoveMotors:
         rospy.init_node("move_motors", anonymous=True)
         # Publisher which will publish to the topic '/cmd_vel'.
         self.mode = GPIO.getmode()
-        GPIO.cleanup()
         self.LeftMotorP = 26
         self.pwmL = 13
         self.LeftMotorN = 19
@@ -34,17 +33,17 @@ class MoveMotors:
 
 
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.RightMotorF, GPIO.OUT)
-        GPIO.setup(self.RightMotorB, GPIO.OUT)
-        GPIO.setup(self.LeftMotorF, GPIO.OUT)
-        GPIO.setup(self.LeftMotorB, GPIO.OUT)
+        GPIO.setup(self.RightMotorP, GPIO.OUT)
+        GPIO.setup(self.RightMotorN, GPIO.OUT)
+        GPIO.setup(self.LeftMotorP, GPIO.OUT)
+        GPIO.setup(self.LeftMotorN, GPIO.OUT)
         GPIO.setup(self.pwmL, GPIO.OUT)
         GPIO.setup(self.pwmR, GPIO.OUT)
 
-        self.MotorLeftSpeed = GPIO.PWM =(self.pwmL, 100)
-        self.MotorRightSpeed = GPIO.PWM = (self.pwmR, 100)
-        self.MotorLeftSpeed.start()
-        self.MotorRightSpeed.start()
+        self.MotorLeftSpeed = GPIO.PWM(self.pwmL, 100)
+        self.MotorRightSpeed = GPIO.PWM(self.pwmR, 100)
+        self.MotorLeftSpeed.start(1)
+        self.MotorRightSpeed.start(1)
         rospy.loginfo("GPIOs cleaned and assigned")
 
     def set(self, direction, value):
@@ -75,12 +74,18 @@ class MoveMotors:
         self.MotorRightSpeed.stop()
         self.MotorLeftSpeed.stop()
         GPIO.cleanup()
+        print("Stopping Motors")
+
 
 
 if __name__ == "__main__":
     try:
         x = MoveMotors()
         x.forward()
+        while(True):
+            x.set('L', 50)
+            x.set('R', 50)
         x.stopMotors()
     except rospy.ROSInterruptException:
+        x.stopMotors()
         pass

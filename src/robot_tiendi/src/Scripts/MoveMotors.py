@@ -89,6 +89,7 @@ class MoveMotors:
             self.set('L', speed - 10)
 
     def idleMotors(self):
+        self.initializeFront()
         self.setSpeed(0)
 
 
@@ -145,6 +146,8 @@ if __name__ == "__main__":
         time.sleep(2)
 
         x.idleMotors()
+
+        x.stopMotors()
 
         print("Done")
 

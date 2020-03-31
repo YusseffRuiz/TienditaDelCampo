@@ -48,13 +48,17 @@ class MoveMotors:
 
     def set(self, direction, value):
         if(direction == 'L'):
-            self.MotorLeftSpeed.ChangeDutyCycle(value)
+            for i in range(value):
+                self.MotorLeftSpeed.ChangeDutyCycle(i)
         elif(direction == 'R'):
-            self.MotorRightSpeed.ChangeDutyCycle(value)
+            for i in range(value):
+                self.MotorRightSpeed.ChangeDutyCycle(i)
+
 
     def setSpeed(self, speed):
-        self.set('L', speed)
-        self.set('R', speed)
+        for i in range(speed):
+            self.MotorLeftSpeed.ChangeDutyCycle(i)
+            self.MotorRightSpeed.ChangeDutyCycle(i)
 
     def initializeFront(self):
         GPIO.output(self.RightMotorP, GPIO.HIGH)
@@ -99,6 +103,15 @@ class MoveMotors:
         self.MotorLeftSpeed.stop()
         GPIO.cleanup()
         print("Stopping Motors")
+
+    def pControl(self):
+        print("Proportional Control")
+
+    def integralControl(self):
+        print("Integral Control")
+
+    def derivativeControl(self):
+        print("DerivativeControl")
 
 
 if __name__ == "__main__":

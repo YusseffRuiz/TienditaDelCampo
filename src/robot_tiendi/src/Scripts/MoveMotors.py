@@ -52,44 +52,105 @@ class MoveMotors:
         elif(direction == 'R'):
             self.MotorRightSpeed.ChangeDutyCycle(value)
 
+    def setSpeed(self, speed):
+        self.set('L', speed)
+        self.set('R', speed)
 
-
-    def forward(self):
+    def initializeFront(self):
         GPIO.output(self.RightMotorP, GPIO.HIGH)
         GPIO.output(self.RightMotorN, GPIO.LOW)
         GPIO.output(self.LeftMotorP, GPIO.HIGH)
         GPIO.output(self.LeftMotorN, GPIO.LOW)
         print("Moving Forward")
-#        self.r.sleep()
 
-    def reverse(self):
+    def initializeBack(self):
         GPIO.output(self.RightMotorN, GPIO.HIGH)
         GPIO.output(self.RightMotorP, GPIO.LOW)
         GPIO.output(self.LeftMotorN, GPIO.HIGH)
         GPIO.output(self.LeftMotorP, GPIO.LOW)
         print("Moving Backwards")
- #       self.r.sleep()
+
+    def moveStraight(self, speed):
+        self.setSpeed(speed)
+
+
+    def turnRight(self, speed):
+        self.set('L', 60)
+        self.set('R', 0)
+
+    def turnLeft(self, speed):
+        self.set('R', 60)
+        self.set('L', 0)
+
+    def diag(self, direction, speed):
+        if(direction == 'R'):
+            self.set('R', speed-10)
+        elif(direction == 'L'):
+            self.set('L', speed - 10)
+
+    def idleMotors(self):
+        self.setSpeed(0)
+
 
     def stopMotors(self):
+        self.initializeFront()
         self.MotorRightSpeed.stop()
         self.MotorLeftSpeed.stop()
         GPIO.cleanup()
-	print("Stopping Motors")
+        print("Stopping Motors")
 
 
 if __name__ == "__main__":
+    x = MoveMotors()
     try:
-	x = MoveMotors()
-	x.forward()
-	time.sleep(4)
-	x.set('L', 70)
-	x.set('R', 70)
-	while(True):
-	   time.sleep(1)
-           # x.forward()
-	#x.stopMotors()
+        x.initializeFront()
+
+        print("First movement, move front")
+        x.moveStraight(60)
+        time.sleep(3)
+
+        x.idleMotors()
+        time.sleep(1)
+
+        print("Move Back")
+        x.initializeBack()
+        x.moveStraight(60)
+
+        time.sleep(3)
+        x.idleMotors()
+        time.sleep(1)
+
+        print("Turn Right")
+        x.turnRight()
+
+        time.sleep(2)
+
+        x.idleMotors()
+
+        time.sleep(1)
+
+        print("Turn Left")
+        x.turnLeft()
+
+        time.sleep(2)
+
+        x.idleMotors()
+
+        time.sleep(1)
+
+        print("diagonal Movement")
+        x.moveStraight()
+        x.diag('R', 60)
+
+        time.sleep(2)
+
+        x.idleMotors()
+
+        print("Done")
+
+
     except KeyboardInterrupt:
-	x.stopMotors()
-	pass
+        x.stopMotors()
+        pass
 #    except rospy.ROSInterruptException:
 #        pass

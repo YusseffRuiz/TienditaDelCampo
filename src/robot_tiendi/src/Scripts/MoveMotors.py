@@ -72,14 +72,14 @@ class MoveMotors():
         GPIO.output(self.RightMotorN, GPIO.LOW)
         GPIO.output(self.LeftMotorP, GPIO.HIGH)
         GPIO.output(self.LeftMotorN, GPIO.LOW)
-        print("Moving Forward")
+        # print("Moving Forward")
 
     def initializeBack(self):
         GPIO.output(self.RightMotorN, GPIO.HIGH)
         GPIO.output(self.RightMotorP, GPIO.LOW)
         GPIO.output(self.LeftMotorN, GPIO.HIGH)
         GPIO.output(self.LeftMotorP, GPIO.LOW)
-        print("Moving Backwards")
+        # print("Moving Backwards")
 
     def moveStraight(self, speed):
         self.setSpeed(speed)

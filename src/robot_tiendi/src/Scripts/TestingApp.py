@@ -5,7 +5,7 @@ import math
 import curses
 
 ##source: https://www.thepythoncode.com/article/control-keyboard-python
-from src.robot_tiendi.src.Scripts.MoveMotors import MoveMotors
+from MoveMotors import MoveMotors
 
 speed = 60
 counter = 1

@@ -22,29 +22,36 @@ if __name__ == "__main__":
             counter = 1
             char = screen.getch()
             robot.idleMotors()
-            while(curses.KEY_UP):
+            if char == ord('q'):
+                break
+            elif(char == curses.KEY_UP):
             # while(keyboard.is_pressed('up')):
                 if(counter==1):
                     robot.initializeFront()
                     counter+=1
                 robot.moveStraight(speed)
                 print("Front")
-            while(curses.KEY_DOWN):
+            elif(char == curses.KEY_DOWN):
             # while(keyboard.is_pressed('down')):
                 if(counter == 1):
                     robot.initializeBack()
                     counter+=1
                 robot.moveStraight(speed)
                 print("Back")
-            while(curses.KEY_LEFT):
+            elif(char == curses.KEY_LEFT):
             # while(keyboard.is_pressed('left')):
                 robot.turnLeft(speed)
                 print("Left")
-            while(curses.KEY_RIGHT):
+            elif(char == curses.KEY_RIGHT):
             # while(keyboard.is_pressed('right')):
                 robot.turnRight(speed)
                 print("Right")
 
     except KeyboardInterrupt:
-        print("Ending Program")
         pass
+    finally:
+        print("Ending Program")
+        curses.nocbreak()
+        screen.keypad(0)
+        curses.echo()
+        curses.endwin()

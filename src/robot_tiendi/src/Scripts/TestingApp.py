@@ -46,6 +46,9 @@ if __name__ == "__main__":
             # while(keyboard.is_pressed('right')):
                 robot.turnRight(speed)
                 print("Right")
+            elif(char == curses.KEY_BACKSPACE):
+                robot.idleMotors
+
 
     except KeyboardInterrupt:
         pass

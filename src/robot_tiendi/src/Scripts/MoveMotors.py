@@ -48,14 +48,21 @@ class MoveMotors():
 
     def set(self, direction, value):
         if(direction == 'L'):
+            if(value == 0):
+                self.MotorLeftSpeed.ChangeDutyCycle(0)
             for i in range(value):
                 self.MotorLeftSpeed.ChangeDutyCycle(i)
         elif(direction == 'R'):
+            if (value == 0):
+                self.MotorRightSpeed.ChangeDutyCycle(0)
             for i in range(value):
                 self.MotorRightSpeed.ChangeDutyCycle(i)
 
 
     def setSpeed(self, speed):
+        if(speed == 0):
+            self.MotorLeftSpeed.ChangeDutyCycle(0)
+            self.MotorRightSpeed.ChangeDutyCycle(0)
         for i in range(speed):
             self.MotorLeftSpeed.ChangeDutyCycle(i)
             self.MotorRightSpeed.ChangeDutyCycle(i)

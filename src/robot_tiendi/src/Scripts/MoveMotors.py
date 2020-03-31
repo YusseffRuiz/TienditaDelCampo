@@ -75,11 +75,11 @@ class MoveMotors:
 
 
     def turnRight(self, speed):
-        self.set('L', 60)
+        self.set('L', speed)
         self.set('R', 0)
 
     def turnLeft(self, speed):
-        self.set('R', 60)
+        self.set('R', speed)
         self.set('L', 0)
 
     def diag(self, direction, speed):
@@ -121,7 +121,7 @@ if __name__ == "__main__":
         time.sleep(1)
 
         print("Turn Right")
-        x.turnRight()
+        x.turnRight(60)
 
         time.sleep(2)
 
@@ -130,7 +130,7 @@ if __name__ == "__main__":
         time.sleep(1)
 
         print("Turn Left")
-        x.turnLeft()
+        x.turnLeft(60)
 
         time.sleep(2)
 
@@ -139,7 +139,7 @@ if __name__ == "__main__":
         time.sleep(1)
 
         print("diagonal Movement")
-        x.moveStraight()
+        x.moveStraight(60)
         x.diag('R', 60)
 
         time.sleep(2)

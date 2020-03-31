@@ -54,6 +54,7 @@ if __name__ == "__main__":
         pass
     finally:
         print("Ending Program")
+        robot.stopMotors()
         curses.nocbreak()
         screen.keypad(0)
         curses.echo()

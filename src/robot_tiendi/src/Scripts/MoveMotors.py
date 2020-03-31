@@ -13,7 +13,7 @@ import math
 
 
 
-class MoveMotors:
+class MoveMotors():
 
     def __init__(self):
 

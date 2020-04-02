@@ -36,7 +36,7 @@ class IMUReading():
 
 
 if __name__ == "__main__":
-    imu = IMUReading
+    imu = IMUReading()
     try:
         while(True):
             print(imu.accel())

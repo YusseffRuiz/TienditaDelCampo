@@ -9,7 +9,7 @@ import math
 #from geometry_msgs.msg import PoseWithCovarianceStamped
 #from tf.transformations import euler_from_quaternion
 #from geometry_msgs.msg import Point, Twist
-
+##http://www.electronoobs.com/eng_robotica_tut6_2.php
 
 
 class IMUReading():
@@ -19,6 +19,8 @@ class IMUReading():
         #       rospy.init_node("move_motors", anonymous=True)
         # Publisher which will publish to the topic '/cmd_vel'.
         self.mpu9250 = FaBo9Axis_MPU9250.MPU9250()
+        self.radToDeg = 180/3.141592654
+
 
 
     def accel(self):
@@ -35,11 +37,32 @@ class IMUReading():
         return mag['x'], mag['y'], mag['z']
 
 
+
 if __name__ == "__main__":
     imu = IMUReading()
+    angleX = 0
+    angleY = 0
+    currentTime = time.time()
+    desiredAngle = 0
     try:
         while(True):
-            print(imu.accel())
+            prevTime = currentTime
+            currentTime = time.time()
+            elapsedTime = currentTime - prevTime
+            acX, acY, acZ = imu.accel()
+            gyX, gyY, gyZ = imu.gyro()
+            accAngleX = math.atan2((acY / 16384) / math.sqrt(pow((acX / 16384), 2) + pow((acZ/16384), 2))) * imu.radToDeg
+            accAngleY = math.atan2((acX / 16384) / math.sqrt(pow((acY / 16384), 2) + pow((acZ / 16384), 2))) * imu.radToDeg
+
+            gyroX = gyX/131
+            gyroY = gyY/131
+
+            angleX = 0.98 * (angleX + gyroX * elapsedTime) + 0.02 * accAngleX
+            angleY = 0.98 * (angleY + gyroY * elapsedTime) + 0.02 * accAngleY
+
+            error = angleY - desiredAngle
+
+
     except KeyboardInterrupt:
         pass
 

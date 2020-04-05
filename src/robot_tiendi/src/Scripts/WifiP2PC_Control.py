@@ -5,7 +5,7 @@ import socket
 def start_server_program():
     host = socket.gethostname()
     port = 8888
-    server_socket = socket.socket()
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((host, port))
 
     server_socket.listen(2)

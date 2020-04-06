@@ -48,22 +48,60 @@ if __name__ == "__main__":
     currentTime = time.time()
     desiredAngle = 0
     counter = 0
+    acX = 0
+    acY = 0
+    acZ = 0
+    gyX = 0
+    gyY = 0
+    gyZ = 0
+
+    raw_acX, raw_acY, raw_acZ = imu.accel()
+    raw_gyX, raw_gyY, raw_gyZ = imu.gyro()
 
     try:
         while(True):
             prevTime = currentTime
             currentTime = time.time()
             elapsedTime = currentTime - prevTime
-            acX, acY, acZ = imu.accel()
-            gyX, gyY, gyZ = imu.gyro()
+            prev_rawacX, prev_rawacY, prev_rawacZ = raw_acX, raw_acY, raw_acZ
+            prev_rawgyX, prev_rawgyY, prev_rawgyZ = raw_gyX, raw_gyY, raw_gyZ
+
+            raw_acX, raw_acY, raw_acZ = imu.accel()
+            raw_gyX, raw_gyY, raw_gyZ = imu.gyro()
+
 
             if (counter <= 10):
                 counter += 1
                 time.sleep(0.3)
                 if(counter == 10):
+                    base_acX = raw_acX
+                    base_acY = raw_acY
+                    base_acZ = raw_acZ
+
+                    base_gyX = raw_gyX
+                    base_gyY = raw_gyY
+                    base_gyZ = raw_gyZ
                     print("Calibrated")
 
+
             else:
+                acX = acY = acZ = gyX = gyY = 0
+                if(abs(raw_acX - prev_rawacX) > 0.1):
+                    acX = raw_acX - base_acX
+                elif(abs(raw_acY - prev_rawacY) > 0.1):
+                    acY = raw_acY - base_acY
+                elif(abs(raw_acZ - prev_rawacZ) > 0.1):
+                    acZ = raw_acZ - base_acZ
+
+                if (abs(raw_gyX - prev_rawgyX) > 0.1):
+                    gyX = raw_gyX - base_gyX
+                elif (abs(raw_gyY - prev_rawgyY) > 0.1):
+                    gyY = raw_gyY - base_gyY
+                elif (abs(raw_gyZ - prev_rawgyZ) > 0.1):
+                    gyZ = raw_gyZ - base_gyZ
+
+
+
                 accAngleX = math.atan((acY / 16384) / math.sqrt(pow((acX / 16384), 2) + pow((acZ/16384), 2))) * imu.radToDeg
                 accAngleY = math.atan((acX / 16384) / math.sqrt(pow((acY / 16384), 2) + pow((acZ / 16384), 2))) * imu.radToDeg
 

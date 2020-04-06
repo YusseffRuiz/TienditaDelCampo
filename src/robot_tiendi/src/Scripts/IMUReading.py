@@ -56,11 +56,26 @@ if __name__ == "__main__":
 
             gyroX = gyX/131
             gyroY = gyY/131
+            gyroZ = gyZ/131
 
-            angleX = 0.98 * (angleX + gyroX * elapsedTime) + 0.02 * accAngleX
-            angleY = 0.98 * (angleY + gyroY * elapsedTime) + 0.02 * accAngleY
+            roll = 0.98 * (angleX + gyroX * elapsedTime) + 0.02 * accAngleX
+            pitch = 0.98 * (angleY + gyroY * elapsedTime) + 0.02 * accAngleY
 
             error = angleY - desiredAngle
+            print("AcceX: " + accAngleX)
+            print("AcceY: " + accAngleY)
+            print("RawAcZ " + acZ)
+
+            print("GyroX: " + gyroX)
+            print("GyroY: " + gyroY)
+            print("GyroZ: " + gyroZ)
+
+            print("Roll: " + roll)
+            print("Pitch " + pitch)
+
+            time.sleep(1)
+
+
 
 
     except KeyboardInterrupt:

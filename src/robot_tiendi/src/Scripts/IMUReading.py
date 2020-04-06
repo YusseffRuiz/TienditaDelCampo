@@ -51,8 +51,8 @@ if __name__ == "__main__":
             elapsedTime = currentTime - prevTime
             acX, acY, acZ = imu.accel()
             gyX, gyY, gyZ = imu.gyro()
-            accAngleX = math.atan2((acY / 16384) / math.sqrt(pow((acX / 16384), 2) + pow((acZ/16384), 2))) * imu.radToDeg
-            accAngleY = math.atan2((acX / 16384) / math.sqrt(pow((acY / 16384), 2) + pow((acZ / 16384), 2))) * imu.radToDeg
+            accAngleX = math.atan((acY / 16384) / math.sqrt(pow((acX / 16384), 2) + pow((acZ/16384), 2))) * imu.radToDeg
+            accAngleY = math.atan((acX / 16384) / math.sqrt(pow((acY / 16384), 2) + pow((acZ / 16384), 2))) * imu.radToDeg
 
             gyroX = gyX/131
             gyroY = gyY/131

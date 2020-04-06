@@ -62,16 +62,16 @@ if __name__ == "__main__":
             pitch = 0.98 * (angleY + gyroY * elapsedTime) + 0.02 * accAngleY
 
             error = angleY - desiredAngle
-            print("AcceX: " + accAngleX)
-            print("AcceY: " + accAngleY)
-            print("RawAcZ " + acZ)
+            print("AcceX: " + str(accAngleX))
+            print("AcceY: " + str(accAngleY))
+            print("RawAcZ " + str(acZ))
 
-            print("GyroX: " + gyroX)
-            print("GyroY: " + gyroY)
-            print("GyroZ: " + gyroZ)
+            print("GyroX: " + str(gyroX))
+            print("GyroY: " + str(gyroY))
+            print("GyroZ: " + str(gyroZ))
 
-            print("Roll: " + roll)
-            print("Pitch " + pitch)
+            print("Roll: " + str(roll))
+            print("Pitch " + str(pitch))
 
             time.sleep(1)
 

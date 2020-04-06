@@ -22,6 +22,9 @@ class IMUReading():
         self.radToDeg = 180/3.141592654
 
 
+    def calibrate(self):
+        ##do something
+        print("Something")
 
     def accel(self):
         accel = self.mpu9250.readAccel()
@@ -44,6 +47,8 @@ if __name__ == "__main__":
     angleY = 0
     currentTime = time.time()
     desiredAngle = 0
+    counter = 0
+
     try:
         while(True):
             prevTime = currentTime
@@ -51,25 +56,33 @@ if __name__ == "__main__":
             elapsedTime = currentTime - prevTime
             acX, acY, acZ = imu.accel()
             gyX, gyY, gyZ = imu.gyro()
-            accAngleX = math.atan((acY / 16384) / math.sqrt(pow((acX / 16384), 2) + pow((acZ/16384), 2))) * imu.radToDeg
-            accAngleY = math.atan((acX / 16384) / math.sqrt(pow((acY / 16384), 2) + pow((acZ / 16384), 2))) * imu.radToDeg
 
-            gyroX = gyX/131
-            gyroY = gyY/131
-            gyroZ = gyZ/131
+            if (counter <= 10):
+                counter += 1
+                time.sleep(0.3)
+                if(counter == 10):
+                    print("Calibrated")
 
-            roll = 0.98 * (angleX + gyroX * elapsedTime) + 0.02 * accAngleX
-            pitch = 0.98 * (angleY + gyroY * elapsedTime) + 0.02 * accAngleY
+            else:
+                accAngleX = math.atan((acY / 16384) / math.sqrt(pow((acX / 16384), 2) + pow((acZ/16384), 2))) * imu.radToDeg
+                accAngleY = math.atan((acX / 16384) / math.sqrt(pow((acY / 16384), 2) + pow((acZ / 16384), 2))) * imu.radToDeg
 
-            error = angleY - desiredAngle
-            print("AcceX: " + str(accAngleX) + " | " + "GyroX: " + str(gyroX) + " | " + "Roll: " + str(roll))
-            print("AcceY: " + str(accAngleY) + " | " + "GyroY: " + str(gyroY) + " | " + "Pitch " + str(pitch))
-            print("RawAcZ " + str(acZ) + " | " + "GyroZ: " + str(gyroZ))
+                gyroX = gyX/131
+                gyroY = gyY/131
+                gyroZ = gyZ/131
 
-            print(" ")
+                roll = 0.98 * (angleX + gyroX * elapsedTime) + 0.02 * accAngleX
+                pitch = 0.98 * (angleY + gyroY * elapsedTime) + 0.02 * accAngleY
+
+                error = angleY - desiredAngle
+                print("AcceX: " + str(acX) + " | " + "GyroX: " + str(gyroX) + " | " + "Roll: " + str(roll))
+                print("AcceY: " + str(acY) + " | " + "GyroY: " + str(gyroY) + " | " + "Pitch " + str(pitch))
+                print("RawAcZ " + str(acZ) + " | " + "GyroZ: " + str(gyroZ))
+
+                print(" ")
 
 
-            time.sleep(1)
+                time.sleep(1)
 
 
 

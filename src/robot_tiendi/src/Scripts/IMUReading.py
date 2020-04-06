@@ -85,7 +85,7 @@ if __name__ == "__main__":
 
 
             else:
-                acX = acY = acZ = gyX = gyY = 0
+                acX = acY = acZ = gyX = gyY = 0.001
                 if(abs(raw_acX - prev_rawacX) > 0.1):
                     acX = raw_acX - base_acX
                 elif(abs(raw_acY - prev_rawacY) > 0.1):

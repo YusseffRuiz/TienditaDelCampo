@@ -14,7 +14,7 @@ def start_server_program():
     port = 8888
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind(('127.0.0.1', port))
-        s.listen()
+        s.listen(5)
         conn, addr = s.accept()
         with conn:
             print('Connected by', addr)

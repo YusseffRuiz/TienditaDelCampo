@@ -7,6 +7,7 @@ def start_server_program():
     port = 8888
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((host, port))
+    print("Waiting for a connection, host: " + host + ", port: " + str(port))
 
     server_socket.listen(2)
     conn, address = server_socket.accept()

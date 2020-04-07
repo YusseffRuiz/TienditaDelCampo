@@ -1,5 +1,8 @@
 import socket
 import subprocess
+from pyp2p.net import *
+from pyp2p.unl import UNL
+from pyp2p.dht_msg import DHT
 
 
 def cmd_p2p_pi(cmd):
@@ -25,15 +28,29 @@ def start_server_program():
 if __name__ == "__main__":
     cmd_p2p_pi("find")
     try:
-        conn, address = start_server_program()
-        try:
-            while True:
-                data = conn.recv(4096).decode()
-                if data:
-                    print("From connected user: " + str(data))
-        except KeyboardInterrupt:
-            conn.close()
-            pass
+        # conn, address = start_server_program()
+        # try:
+        #     while True:
+        #         data = conn.recv(4096).decode()
+        #         if data:
+        #             print("From connected user: " + str(data))
+        # except KeyboardInterrupt:
+        #     conn.close()
+        #     pass
+
+        # Start Bob's direct server.
+        pi_dht = DHT()
+        pi_direct = Net(passive_bind="192.168.15.16", passive_port=8888, interface="wlan0", net_type="direct",
+                         node_type="active", dht_node=pi_dht, debug=1)
+        pi_direct.start()
+
+        while 1:
+        # Bob get reply.
+            for con in pi_direct:
+                for reply in con:
+                    print(reply)
+
+
     except KeyboardInterrupt:
         pass
     finally:

@@ -58,6 +58,7 @@ if __name__ == "__main__":
     raw_acX, raw_acY, raw_acZ = imu.accel()
     raw_gyX, raw_gyY, raw_gyZ = imu.gyro()
 
+
     try:
         while(True):
             prevTime = currentTime
@@ -81,11 +82,11 @@ if __name__ == "__main__":
                     base_gyX = raw_gyX
                     base_gyY = raw_gyY
                     base_gyZ = raw_gyZ
+                    acX = acY = acZ = gyX = gyY = 0.001
                     print("Calibrated")
 
 
             else:
-                acX = acY = acZ = gyX = gyY = 0.001
                 if(abs(raw_acX - base_acX) > 0.01):
                     acX = raw_acX - base_acX
                 elif(abs(raw_acY - base_acY) > 0.01):

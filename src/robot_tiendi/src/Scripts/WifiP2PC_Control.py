@@ -1,3 +1,4 @@
+
 import socket
 import subprocess
 
@@ -36,7 +37,18 @@ def start_server_program():
 if __name__ == "__main__":
     cmd_p2p_pi("find")
     try:
-        start_server_program()
+        port = 8888
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.bind(('127.0.0.1', port))
+            s.listen(5)
+            conn, addr = s.accept()
+            with conn:
+                print('Connected by', addr)
+                while True:
+                    data = conn.recv(1024)
+                    print(data)
+                    if not data:
+                        break
         # conn, address = start_server_program()
         # try:
         #     while True:

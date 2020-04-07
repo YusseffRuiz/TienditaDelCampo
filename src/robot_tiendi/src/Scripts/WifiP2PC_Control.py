@@ -26,16 +26,16 @@ if __name__ == "__main__":
     cmd_p2p_pi("find")
     try:
         conn, address = start_server_program()
-        while True:
-            data = conn.recv(4096).decode()
-            if data:
-                print("From connected user: " + str(data))
+        try:
+            while True:
+                data = conn.recv(4096).decode()
+                if data:
+                    print("From connected user: " + str(data))
+        except KeyboardInterrupt:
+            conn.close()
+            pass
     except KeyboardInterrupt:
-        conn.close()
-        cmd_p2p_pi("stop")
-        print("Ending Program, closing connection")
         pass
     finally:
-        conn.close()
         cmd_p2p_pi("stop")
         print("Ending Program, closing connection")

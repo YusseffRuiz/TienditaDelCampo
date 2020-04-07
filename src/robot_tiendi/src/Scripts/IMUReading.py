@@ -118,7 +118,7 @@ if __name__ == "__main__":
                 print("RawAcZ " + str(acZ) + " | " + "GyroZ: " + str(gyroZ))
 
                 print(" ")
-                time.sleep(1)
+                time.sleep(0.5)
 
 
 

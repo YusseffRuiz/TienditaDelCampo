@@ -86,18 +86,18 @@ if __name__ == "__main__":
 
             else:
                 acX = acY = acZ = gyX = gyY = 0.001
-                if(abs(raw_acX - prev_rawacX) > 0.1):
+                if(abs(raw_acX - prev_rawacX) > 0.01):
                     acX = raw_acX - base_acX
-                elif(abs(raw_acY - prev_rawacY) > 0.1):
+                elif(abs(raw_acY - prev_rawacY) > 0.01):
                     acY = raw_acY - base_acY
-                elif(abs(raw_acZ - prev_rawacZ) > 0.1):
+                elif(abs(raw_acZ - prev_rawacZ) > 0.01):
                     acZ = raw_acZ - base_acZ
 
-                if (abs(raw_gyX - prev_rawgyX) > 0.1):
+                if (abs(raw_gyX - prev_rawgyX) > 0.01):
                     gyX = raw_gyX - base_gyX
-                elif (abs(raw_gyY - prev_rawgyY) > 0.1):
+                elif (abs(raw_gyY - prev_rawgyY) > 0.01):
                     gyY = raw_gyY - base_gyY
-                elif (abs(raw_gyZ - prev_rawgyZ) > 0.1):
+                elif (abs(raw_gyZ - prev_rawgyZ) > 0.01):
                     gyZ = raw_gyZ - base_gyZ
 
 

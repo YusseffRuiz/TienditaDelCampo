@@ -13,7 +13,7 @@ def start_server_program():
     host = socket.gethostname()
     port = 8888
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind(('127.0.0.1', port))
+    server_socket.bind((' ', port))
     print("Waiting for a connection, host: " + host + ", port: " + str(port))
 
     server_socket.listen(2)

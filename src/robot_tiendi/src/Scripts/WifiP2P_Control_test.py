@@ -56,8 +56,8 @@ if __name__ == "__main__":
         server_thread.start()
         # server started
         print("Starting Loop")
-        # while(DIRECTION.find("q") == -1):
-        #     time.sleep(.1)
+        while(DIRECTION.find("q") == -1):
+            time.sleep(.2)
         server_socket.shutdown()
         server_socket.server_close()
         # robot.robotMovement(DIRECTION)

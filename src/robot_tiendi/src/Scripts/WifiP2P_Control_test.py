@@ -55,14 +55,15 @@ if __name__ == "__main__":
         server_thread.daemon = True
         server_thread.start()
         # server started
-        while(DIRECTION.find("q") == -1):
-            time.sleep(.1)
+        print("Starting Loop")
+        # while(DIRECTION.find("q") == -1):
+        #     time.sleep(.1)
+        server_socket.shutdown()
+        server_socket.server_close()
         # robot.robotMovement(DIRECTION)
     except KeyboardInterrupt:
         pass
     finally:
-        server_socket.shutdown()
-        server_socket.server_close()
         ROBOT.stopMotors()
         cmd_p2p_pi("stop")
         print("Ending Program, closing connection")

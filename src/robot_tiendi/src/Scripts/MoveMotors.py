@@ -157,8 +157,6 @@ class MoveMotors():
             # counter = 3
             print("Stop")
 
-        d
-
 
 if __name__ == "__main__":
     x = MoveMotors()

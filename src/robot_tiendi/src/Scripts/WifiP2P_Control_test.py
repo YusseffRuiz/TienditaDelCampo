@@ -51,7 +51,7 @@ if __name__ == "__main__":
     cmd_p2p_pi("find")
     try:
         server_socket = SocketServer.TCPServer((HOST, PORT), MyTCPHandler)
-        server_thread = threading.Thread(target=start_server_program, args=(server_socket,))
+        server_thread = threading.Thread(server_socket.serve_forever)
         server_thread.daemon = True
         server_thread.start()
         # server started

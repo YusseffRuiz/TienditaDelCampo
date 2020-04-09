@@ -126,11 +126,11 @@ class MoveMotors():
         print("DerivativeControl")
 
     def robotMovement(self, direction):
-
+        print("Starting selection" + direction)
         self.initializeFront()
         # counter = 1
         self.idleMotors()
-        print("Starting selection" + direction)
+        print("motors running")
         if direction.find("q")!= -1:
             self.stopMotors()
             # counter = 3

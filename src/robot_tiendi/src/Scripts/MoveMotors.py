@@ -11,7 +11,7 @@ import math
 #from tf.transformations import euler_from_quaternion
 #from geometry_msgs.msg import Point, Twist
 
-SPEEDL = 180
+SPEEDL = 80
 SPEEDR = SPEEDL
 
 
@@ -138,21 +138,21 @@ class MoveMotors():
                 # counter += 1
             print("Front")
             self.moveStraight(SPEEDL)
-        elif ("x" is direction):
+        elif (direction.find("x") != -1):
             # if (counter == 1):
             self.initializeBack()
                 # counter += 1
             print("Back")
             self.moveStraight(SPEEDL)
-        elif ("a" in direction):
+        elif (direction.find("a") != -1):
             self.turnLeft(SPEEDL)
             # counter = 3
             print("Left")
-        elif ("d" in direction.decode('utf-8')):
+        elif (direction.find("d") != -1):
             self.turnRight(SPEEDL)
             # counter = 3
             print("Right")
-        elif ("s" in direction.decode('utf-8')):
+        elif (direction.find("s") != -1):
             self.idleMotors
             # counter = 3
             print("Stop")

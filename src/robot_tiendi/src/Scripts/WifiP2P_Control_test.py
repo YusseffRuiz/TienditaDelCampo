@@ -21,9 +21,9 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 #	print self.data
         DIRECTION = self.data
 #	print(DIRECTION)
-        print("Sending Direction: " + DIRECTION)
+        # print("Sending Direction: " + DIRECTION)
         ROBOT.robotMovement(DIRECTION)
-        print("End movement")
+        # print("End movement")
         # print '=== Got something from ' + self.client_address[0] + ' ==='
         # print(self.data) # Testing purposes
 

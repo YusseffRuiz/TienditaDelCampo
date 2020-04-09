@@ -1,16 +1,29 @@
 import socket
 import subprocess
 import SocketServer
+import curses
+
+
+from MoveMotors import MoveMotors
+
+
+
+HOST = "192.168.15.16"
+PORT = 8888
+SPEEDL = 180
+SPEEDR = SPEEDL
 
 class MyTCPHandler(SocketServer.BaseRequestHandler):
 
     def handle(self):
         self.data = self.request.recv(1024).strip()
-        print '=== Got something from ' + self.client_address[0] + ' ==='
-        print(self.data) # Print it out I guess...just to note it's been received
-        print '\n\n\n=== SENDING SPOOFED DATA TO ALL CLIENTS ===\n'
-#        self.request.sendall(self.data.upper())
-#        print json.dumps({'location': {'lat': self.latitude, 'lng': self.longtitude}, 'accuracy': self.accuracy})
+        direction = self.data
+        self.robot = MoveMotors()
+        self.robot.robotMovement(direction)
+        # print '=== Got something from ' + self.client_address[0] + ' ==='
+        # print(self.data) # Testing purposes
+
+
 
 
 def cmd_p2p_pi(cmd):
@@ -21,20 +34,9 @@ def cmd_p2p_pi(cmd):
     print(output)
 
 def start_server_program():
-    host = "192.168.15.16"
-    port = 8888
-#    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#    server_socket.bind(('', port))
-    server_socket = SocketServer.TCPServer((host, 8888), MyTCPHandler)
-    print("Waiting for a connection, host: " + host + ", port: " + str(port))
+    server_socket = SocketServer.TCPServer((HOST, PORT), MyTCPHandler)
+    print("Waiting for a connection, host: " + HOST + ", port: " + str(PORT))
     server_socket.serve_forever()
-
-#    server_socket.listen(10)
-#    print("Socket listening")
-#    while(True):
-#    	conn, address = server_socket.accept()
-#    print("connection From: " + str(address))
-#    return conn, address
 
 
 if __name__ == "__main__":

@@ -11,6 +11,8 @@ import math
 #from tf.transformations import euler_from_quaternion
 #from geometry_msgs.msg import Point, Twist
 
+SPEEDL = 180
+SPEEDR = SPEEDL
 
 
 class MoveMotors():
@@ -119,6 +121,30 @@ class MoveMotors():
 
     def derivativeControl(self):
         print("DerivativeControl")
+
+    def robotMovement(self, direction):
+        self.initializeFront()
+        while (True):
+            counter = 1
+            self.idleMotors()
+            if direction == "q":
+                   break
+            elif (direction == "w"):
+                if (counter == 1):
+                    self.initializeFront()
+                    counter += 1
+                self.moveStraight(SPEEDL)
+            elif (direction == "x"):
+                if (counter == 1):
+                    self.initializeBack()
+                    counter += 1
+                self.moveStraight(SPEEDL)
+            elif (direction == "a"):
+                self.turnLeft(SPEEDL)
+            elif (direction == "d"):
+                self.turnRight(SPEEDL)
+            elif (direction == "s"):
+                 self.idleMotors
 
 
 if __name__ == "__main__":

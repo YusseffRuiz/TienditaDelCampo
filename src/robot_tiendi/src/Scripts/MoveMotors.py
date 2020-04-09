@@ -104,6 +104,8 @@ class MoveMotors():
 
     def idleMotors(self):
         self.initializeFront()
+        self.setSpeed(10)
+        time.sleep(100)
         self.setSpeed(0)
 
 

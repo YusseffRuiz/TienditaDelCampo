@@ -18,7 +18,7 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 
     def handle(self):
         self.data = self.request.recv(1024).strip()
-        DIRECTION = str(self.data)
+        DIRECTION = self.data
         print("Sending Direction: " + DIRECTION)
         ROBOT.robotMovement(DIRECTION)
         print("End movement")

@@ -131,7 +131,7 @@ class MoveMotors():
         # counter = 1
         # self.idleMotors()
         print("motors running")
-        if direction.find("q")!= -1:
+        if (direction.find("q")!= -1):
             self.stopMotors()
             # counter = 3
             print("Quit")

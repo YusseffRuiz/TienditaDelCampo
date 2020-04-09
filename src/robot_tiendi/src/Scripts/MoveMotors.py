@@ -130,7 +130,7 @@ class MoveMotors():
             self.idleMotors()
             if direction == "q":
                 self.stopMotors()
-                counter = 2
+                counter = 3
             elif (direction == "w"):
                 if (counter == 1):
                     self.initializeFront()
@@ -143,13 +143,13 @@ class MoveMotors():
                 self.moveStraight(SPEEDL)
             elif (direction == "a"):
                 self.turnLeft(SPEEDL)
-                counter = 2
+                counter = 3
             elif (direction == "d"):
                 self.turnRight(SPEEDL)
-                counter = 2
+                counter = 3
             elif (direction == "s"):
-                 self.idleMotors
-                counter = 2
+                self.idleMotors
+                counter = 3
 
 
 

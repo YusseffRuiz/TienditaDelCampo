@@ -126,38 +126,36 @@ class MoveMotors():
     def robotMovement(self, direction):
 
         self.initializeFront()
-        counter = 1
-        print("Starting Loop: ")
-        while (counter <= 2):
-            self.idleMotors()
-            if direction == "q":
-                self.stopMotors()
-                counter = 3
-                print("Quit")
-            elif (direction == "w"):
-                if (counter == 1):
-                    self.initializeFront()
-                    counter += 1
-                    print("Front")
-                self.moveStraight(SPEEDL)
-            elif (direction == "x"):
-                if (counter == 1):
-                    self.initializeBack()
-                    counter += 1
-                    print("Back")
-                self.moveStraight(SPEEDL)
-            elif (direction == "a"):
-                self.turnLeft(SPEEDL)
-                counter = 3
-                print("Left")
-            elif (direction == "d"):
-                self.turnRight(SPEEDL)
-                counter = 3
-                print("Right")
-            elif (direction == "s"):
-                self.idleMotors
-                counter = 3
-                print("Stop")
+        # counter = 1
+        self.idleMotors()
+        if direction == "q":
+            self.stopMotors()
+            # counter = 3
+            print("Quit")
+        elif (direction == "w"):
+            # if (counter == 1):
+            self.initializeFront()
+                # counter += 1
+            print("Front")
+            self.moveStraight(SPEEDL)
+        elif (direction == "x"):
+            # if (counter == 1):
+            self.initializeBack()
+                # counter += 1
+            print("Back")
+            self.moveStraight(SPEEDL)
+        elif (direction == "a"):
+            self.turnLeft(SPEEDL)
+            # counter = 3
+            print("Left")
+        elif (direction == "d"):
+            self.turnRight(SPEEDL)
+            # counter = 3
+            print("Right")
+        elif (direction == "s"):
+            self.idleMotors
+            # counter = 3
+            print("Stop")
 
 
 

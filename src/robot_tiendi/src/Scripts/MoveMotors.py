@@ -139,26 +139,26 @@ class MoveMotors():
             # if (counter == 1):
             self.initializeFront()
                 # counter += 1
-            # print("Front")
+            print("Front")
             self.moveStraight(SPEEDL)
         elif (direction.find("x") != -1):
             # if (counter == 1):
             self.initializeBack()
                 # counter += 1
-            # print("Back")
+            print("Back")
             self.moveStraight(SPEEDL)
         elif (direction.find("a") != -1):
             self.turnLeft(SPEEDL)
             # counter = 3
-            # print("Left")
+            print("Left")
         elif (direction.find("d") != -1):
             self.turnRight(SPEEDL)
             # counter = 3
-            # print("Right")
+            print("Right")
         elif (direction.find("s") != -1):
             self.idleMotors
             # counter = 3
-            # print("Stop")
+            print("Stop")
 
 
 if __name__ == "__main__":

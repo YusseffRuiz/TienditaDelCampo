@@ -11,7 +11,7 @@ import math
 #from tf.transformations import euler_from_quaternion
 #from geometry_msgs.msg import Point, Twist
 
-SPEEDL = 70
+SPEEDL = 80
 SPEEDR = SPEEDL
 
 
@@ -126,11 +126,11 @@ class MoveMotors():
         print("DerivativeControl")
 
     def robotMovement(self, direction):
-        print("Starting selection" + direction)
-        self.initializeFront()
+        # print("Starting selection" + direction)
+        # self.initializeFront()
         # counter = 1
-        # self.idleMotors()
-        print("motors running")
+        self.idleMotors()
+        # print("motors running")
         if (direction.find("q")!= -1):
             self.stopMotors()
             # counter = 3

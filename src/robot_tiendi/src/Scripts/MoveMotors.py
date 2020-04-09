@@ -125,7 +125,7 @@ class MoveMotors():
     def robotMovement(self, direction):
         self.initializeFront()
         counter = 1
-        while (2):
+        while (True):
             self.idleMotors()
             if direction == "q":
                    break

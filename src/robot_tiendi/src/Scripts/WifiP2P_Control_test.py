@@ -7,9 +7,9 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
     def handle(self):
         self.data = self.request.recv(1024).strip()
         print '=== Got something from ' + self.client_address[0] + ' ==='
-        print self.data # Print it out I guess...just to note it's been received
+        print(self.data) # Print it out I guess...just to note it's been received
         print '\n\n\n=== SENDING SPOOFED DATA TO ALL CLIENTS ===\n'
-        self.request.sendall(self.data.upper())
+#        self.request.sendall(self.data.upper())
 #        print json.dumps({'location': {'lat': self.latitude, 'lng': self.longtitude}, 'accuracy': self.accuracy})
 
 
@@ -21,7 +21,7 @@ def cmd_p2p_pi(cmd):
     print(output)
 
 def start_server_program():
-    host = "192.168.15.18"
+    host = "192.168.15.16"
     port = 8888
 #    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #    server_socket.bind(('', port))

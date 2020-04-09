@@ -65,9 +65,10 @@ class MoveMotors():
         if(speed == 0):
             self.MotorLeftSpeed.ChangeDutyCycle(0)
             self.MotorRightSpeed.ChangeDutyCycle(0)
-        for i in range(speed):
-            self.MotorLeftSpeed.ChangeDutyCycle(i)
-            self.MotorRightSpeed.ChangeDutyCycle(i)
+        else:
+            for i in range(speed):
+                self.MotorLeftSpeed.ChangeDutyCycle(i)
+                self.MotorRightSpeed.ChangeDutyCycle(i)
 
     def initializeFront(self):
         GPIO.output(self.RightMotorP, GPIO.HIGH)
@@ -123,33 +124,40 @@ class MoveMotors():
         print("DerivativeControl")
 
     def robotMovement(self, direction):
-        print("Sending Direction: " + direction)
+
         self.initializeFront()
         counter = 1
+        print("Starting Loop: ")
         while (counter <= 2):
             self.idleMotors()
             if direction == "q":
                 self.stopMotors()
                 counter = 3
+                print("Quit")
             elif (direction == "w"):
                 if (counter == 1):
                     self.initializeFront()
                     counter += 1
+                    print("Front")
                 self.moveStraight(SPEEDL)
             elif (direction == "x"):
                 if (counter == 1):
                     self.initializeBack()
                     counter += 1
+                    print("Back")
                 self.moveStraight(SPEEDL)
             elif (direction == "a"):
                 self.turnLeft(SPEEDL)
                 counter = 3
+                print("Left")
             elif (direction == "d"):
                 self.turnRight(SPEEDL)
                 counter = 3
+                print("Right")
             elif (direction == "s"):
                 self.idleMotors
                 counter = 3
+                print("Stop")
 
 
 

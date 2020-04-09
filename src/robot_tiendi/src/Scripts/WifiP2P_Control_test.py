@@ -1,7 +1,6 @@
 import socket
 import subprocess
 import SocketServer
-import curses
 
 
 from MoveMotors import MoveMotors
@@ -17,7 +16,7 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 
     def handle(self):
         self.data = self.request.recv(1024).strip()
-        direction = self.data
+        direction = str(self.data)
         self.robot = MoveMotors()
         self.robot.robotMovement(direction)
         # print '=== Got something from ' + self.client_address[0] + ' ==='

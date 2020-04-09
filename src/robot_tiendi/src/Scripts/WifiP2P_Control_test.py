@@ -18,8 +18,8 @@ DIRECTION = "s"
 class MyTCPHandler(SocketServer.BaseRequestHandler):
 
     def handle(self):
-        self.data = self.request.recv(1024).strip()
-        DIRECTION = str(self.data)
+        self.data = self.request.recv(1024)
+        DIRECTION = str(self.data, "utf-8")
         ROBOT.robotMovement(DIRECTION)
         print("End sending")
         # print '=== Got something from ' + self.client_address[0] + ' ==='

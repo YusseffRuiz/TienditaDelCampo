@@ -18,7 +18,9 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 
     def handle(self):
         self.data = self.request.recv(1024).strip()
-        DIRECTION = self.data
+#	print self.data
+        DIRECTION = self.data.decode('utf-8')
+#	print(DIRECTION)
         print("Sending Direction: " + DIRECTION)
         ROBOT.robotMovement(DIRECTION)
         print("End movement")
@@ -49,5 +51,6 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         pass
     finally:
+	ROBOT.stopMotors()
         cmd_p2p_pi("stop")
         print("Ending Program, closing connection")

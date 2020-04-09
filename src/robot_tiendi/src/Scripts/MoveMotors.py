@@ -11,7 +11,7 @@ import math
 #from tf.transformations import euler_from_quaternion
 #from geometry_msgs.msg import Point, Twist
 
-SPEEDL = 80
+SPEEDL = 70
 SPEEDR = SPEEDL
 
 

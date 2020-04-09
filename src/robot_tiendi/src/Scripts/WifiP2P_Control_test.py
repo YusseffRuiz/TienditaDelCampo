@@ -17,9 +17,9 @@ ROBOT = MoveMotors()
 class MyTCPHandler(SocketServer.BaseRequestHandler):
 
     def handle(self):
-        self.data = self.request.recv(1024).strip()
+        self.data = self.request.recv(1024)
 #	print self.data
-        DIRECTION = self.data.decode('utf-8')
+        DIRECTION = self.data
 #	print(DIRECTION)
         print("Sending Direction: " + DIRECTION)
         ROBOT.robotMovement(DIRECTION)

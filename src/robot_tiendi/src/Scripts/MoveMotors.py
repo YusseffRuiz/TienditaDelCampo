@@ -132,7 +132,7 @@ class MoveMotors():
             self.stopMotors()
             # counter = 3
             print("Quit")
-        elif (direction == b'w'):
+        elif (direction.encode('utf-8') == b'w'):
             # if (counter == 1):
             self.initializeFront()
                 # counter += 1

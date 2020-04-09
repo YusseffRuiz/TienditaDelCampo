@@ -12,15 +12,10 @@ PORT = 8888
 SPEEDL = 180
 SPEEDR = SPEEDL
 
-ROBOT = MoveMotors()
+
 
 class MyTCPHandler(SocketServer.BaseRequestHandler):
-    def __init__(self):
-        # Creates a node with name 'speed_controller' and make sure it is a
-        # unique node (using anonymous=True).
-        #       rospy.init_node("move_motors", anonymous=True)
-        # Publisher which will publish to the topic '/cmd_vel'.
-        self.robot = MoveMotors()
+    ROBOT = MoveMotors()
 
     def handle(self):
         self.data = self.request.recv(1024).strip()
@@ -30,26 +25,26 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
         # print(self.data) # Testing purposes
 
     def robotMovement(self, direction):
-        self.robot.initializeFront()
+        self.ROBOT.initializeFront()
         counter = 1
         while (2):
-            self.robot.idleMotors()
+            self.ROBOT.idleMotors()
             if direction == "q":
                    break
             elif (direction == "w"):
                 if (counter == 1):
-                    self.robot.initializeFront()
+                    self.ROBOT.initializeFront()
                     counter += 1
-                self.robot.moveStraight(SPEEDL)
+                self.ROBOT.moveStraight(SPEEDL)
             elif (direction == "x"):
                 if (counter == 1):
-                    self.robot.initializeBack()
+                    self.ROBOT.initializeBack()
                     counter += 1
-                self.robot.moveStraight(SPEEDL)
+                self.ROBOT.moveStraight(SPEEDL)
             elif (direction == "a"):
-                self.robot.turnLeft(SPEEDL)
+                self.ROBOT.turnLeft(SPEEDL)
             elif (direction == "d"):
-                self.robot.turnRight(SPEEDL)
+                self.ROBOT.turnRight(SPEEDL)
             elif (direction == "s"):
                  self.robot.idleMotors
 

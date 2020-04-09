@@ -1,6 +1,7 @@
 import socket
 import subprocess
 import SocketServer
+import threading
 
 
 from MoveMotors import MoveMotors
@@ -12,41 +13,16 @@ PORT = 8888
 SPEEDL = 180
 SPEEDR = SPEEDL
 
+DIRECTION = "s"
 
 
 class MyTCPHandler(SocketServer.BaseRequestHandler):
-    ROBOT = MoveMotors()
 
     def handle(self):
         self.data = self.request.recv(1024).strip()
-        direction = str(self.data)
-        self.robotMovement(direction)
+        DIRECTION = str(self.data)
         # print '=== Got something from ' + self.client_address[0] + ' ==='
         # print(self.data) # Testing purposes
-
-    def robotMovement(self, direction):
-        self.ROBOT.initializeFront()
-        counter = 1
-        while (2):
-            self.ROBOT.idleMotors()
-            if direction == "q":
-                   break
-            elif (direction == "w"):
-                if (counter == 1):
-                    self.ROBOT.initializeFront()
-                    counter += 1
-                self.ROBOT.moveStraight(SPEEDL)
-            elif (direction == "x"):
-                if (counter == 1):
-                    self.ROBOT.initializeBack()
-                    counter += 1
-                self.ROBOT.moveStraight(SPEEDL)
-            elif (direction == "a"):
-                self.ROBOT.turnLeft(SPEEDL)
-            elif (direction == "d"):
-                self.ROBOT.turnRight(SPEEDL)
-            elif (direction == "s"):
-                 self.robot.idleMotors
 
 
 
@@ -66,8 +42,11 @@ def start_server_program():
 
 if __name__ == "__main__":
     cmd_p2p_pi("find")
+    robot = MoveMotors()
+
     try:
-        start_server_program()
+        server = threading.Thread(target=start_server_program(), args=(1, ))
+        rbt = threading.Thread(target=robot.robotMovement(DIRECTION), args=(1, ))
     except KeyboardInterrupt:
         pass
     finally:

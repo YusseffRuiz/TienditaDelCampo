@@ -122,6 +122,30 @@ class MoveMotors():
     def derivativeControl(self):
         print("DerivativeControl")
 
+    def robotMovement(self, direction):
+        self.initializeFront()
+        counter = 1
+        while (2):
+            self.idleMotors()
+            if direction == "q":
+                   break
+            elif (direction == "w"):
+                if (counter == 1):
+                    self.initializeFront()
+                    counter += 1
+                self.moveStraight(SPEEDL)
+            elif (direction == "x"):
+                if (counter == 1):
+                    self.initializeBack()
+                    counter += 1
+                self.moveStraight(SPEEDL)
+            elif (direction == "a"):
+                self.turnLeft(SPEEDL)
+            elif (direction == "d"):
+                self.turnRight(SPEEDL)
+            elif (direction == "s"):
+                 self.idleMotors
+
 
 
 

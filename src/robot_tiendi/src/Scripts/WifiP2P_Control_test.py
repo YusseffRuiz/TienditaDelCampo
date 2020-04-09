@@ -1,7 +1,6 @@
 import socket
 import subprocess
 import SocketServer
-import threading
 
 
 from MoveMotors import MoveMotors
@@ -43,7 +42,6 @@ def start_server_program():
 
 if __name__ == "__main__":
     cmd_p2p_pi("find")
-    robot = MoveMotors()
     try:
         start_server_program()
         # robot.robotMovement(DIRECTION)

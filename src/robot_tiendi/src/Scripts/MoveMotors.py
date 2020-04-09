@@ -128,7 +128,8 @@ class MoveMotors():
         while (True):
             self.idleMotors()
             if direction == "q":
-                   break
+                self.stopMotors()
+                break
             elif (direction == "w"):
                 if (counter == 1):
                     self.initializeFront()

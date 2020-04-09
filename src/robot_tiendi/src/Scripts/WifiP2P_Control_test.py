@@ -45,8 +45,8 @@ if __name__ == "__main__":
     robot = MoveMotors()
 
     try:
-        server = threading.Thread(target=start_server_program(), args=(1, ))
-        rbt = threading.Thread(target=robot.robotMovement(DIRECTION), args=(1, ))
+        server = threading.Thread(target=start_server_program)
+        rbt = threading.Thread(target=robot.robotMovement, args=(DIRECTION, ))
     except KeyboardInterrupt:
         pass
     finally:

@@ -12,7 +12,7 @@ HOST = "192.168.15.16"
 PORT = 8888
 SPEEDL = 180
 SPEEDR = SPEEDL
-# ROBOT = MoveMotors()
+ROBOT = MoveMotors()
 DIRECTION = "s"
 
 
@@ -21,6 +21,7 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
     def handle(self):
         self.data = self.request.recv(1024).strip()
         DIRECTION = str(self.data)
+        ROBOT.robotMovement(DIRECTION)
         # print '=== Got something from ' + self.client_address[0] + ' ==='
         # print(self.data) # Testing purposes
 
@@ -45,7 +46,7 @@ if __name__ == "__main__":
     robot = MoveMotors()
     try:
         start_server_program()
-        robot.robotMovement(DIRECTION)
+        # robot.robotMovement(DIRECTION)
     except KeyboardInterrupt:
         pass
     finally:

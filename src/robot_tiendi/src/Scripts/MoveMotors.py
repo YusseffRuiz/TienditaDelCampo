@@ -105,7 +105,7 @@ class MoveMotors():
     def idleMotors(self):
         self.initializeFront()
         self.setSpeed(10)
-        time.sleep(100)
+        time.sleep(0.2)
         self.setSpeed(0)
 
 
@@ -128,6 +128,7 @@ class MoveMotors():
     def robotMovement(self, direction):
         # print("Starting selection" + direction)
         # self.initializeFront()
+        # time.sleep(.2)
         # counter = 1
         self.idleMotors()
         # print("motors running")

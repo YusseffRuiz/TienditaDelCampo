@@ -2,7 +2,6 @@ import socket
 import subprocess
 import SocketServer
 import threading
-import time
 
 
 
@@ -16,6 +15,7 @@ SPEEDL = 180
 SPEEDR = SPEEDL
 ROBOT = MoveMotors()
 DIRECTION = "s"
+server_socket = SocketServer.TCPServer((HOST, PORT), MyTCPHandler)
 
 
 class MyTCPHandler(SocketServer.BaseRequestHandler):
@@ -27,6 +27,8 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 #	print(DIRECTION)
         # print("Sending Direction: " + DIRECTION)
         ROBOT.robotMovement(DIRECTION)
+        if(DIRECTION.find("q") != -1):
+            server_socket.close()
         # print("End movement")
         # print '=== Got something from ' + self.client_address[0] + ' ==='
         # print(self.data) # Testing purposes
@@ -41,7 +43,8 @@ def cmd_p2p_pi(cmd):
     print("*** Running wpa command ***")
     print(output)
 
-def start_server_program(server_socket):
+def start_server_program():
+
     print("Waiting for a connection, host: " + HOST + ", port: " + str(PORT))
     server_socket.serve_forever()
 
@@ -50,20 +53,12 @@ def start_server_program(server_socket):
 if __name__ == "__main__":
     cmd_p2p_pi("find")
     try:
-        server_socket = SocketServer.TCPServer((HOST, PORT), MyTCPHandler)
-        server_thread = threading.Thread(target=server_socket.serve_forever)
-        server_thread.daemon = True
-        server_thread.start()
-        # server started
-        print("Starting Loop")
-        while(DIRECTION.find("q") == -1):
-            time.sleep(.2)
-        server_socket.shutdown()
-        server_socket.server_close()
+        start_server_program()
         # robot.robotMovement(DIRECTION)
     except KeyboardInterrupt:
         pass
     finally:
+        server_socket.shutdown()
         ROBOT.stopMotors()
         cmd_p2p_pi("stop")
         print("Ending Program, closing connection")

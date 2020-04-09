@@ -12,7 +12,7 @@ HOST = "192.168.15.16"
 PORT = 8888
 SPEEDL = 180
 SPEEDR = SPEEDL
-
+# ROBOT = MoveMotors()
 DIRECTION = "s"
 
 
@@ -43,10 +43,9 @@ def start_server_program():
 if __name__ == "__main__":
     cmd_p2p_pi("find")
     robot = MoveMotors()
-
     try:
-        server = threading.Thread(target=start_server_program)
-        rbt = threading.Thread(target=robot.robotMovement, args=(DIRECTION, ))
+        start_server_program()
+        robot.robotMovement(DIRECTION)
     except KeyboardInterrupt:
         pass
     finally:

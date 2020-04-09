@@ -129,7 +129,7 @@ class MoveMotors():
         print("Starting selection" + direction)
         self.initializeFront()
         # counter = 1
-        self.idleMotors()
+        # self.idleMotors()
         print("motors running")
         if direction.find("q")!= -1:
             self.stopMotors()

@@ -123,7 +123,7 @@ class MoveMotors():
         print("DerivativeControl")
 
     def robotMovement(self, direction):
-        print("Starting robot")
+        print("Sending Direction: " + direction)
         self.initializeFront()
         counter = 1
         while (counter <= 2):

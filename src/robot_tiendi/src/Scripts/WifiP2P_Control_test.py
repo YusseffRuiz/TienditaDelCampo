@@ -20,7 +20,6 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
     def handle(self):
         self.data = self.request.recv(1024).strip()
         DIRECTION = str(self.data)
-        print("Sending Direction")
         ROBOT.robotMovement(DIRECTION)
         print("End sending")
         # print '=== Got something from ' + self.client_address[0] + ' ==='

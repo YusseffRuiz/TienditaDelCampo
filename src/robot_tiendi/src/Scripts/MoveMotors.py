@@ -128,36 +128,36 @@ class MoveMotors():
         self.initializeFront()
         # counter = 1
         self.idleMotors()
-        if direction.decode('utf-8') == 'q':
+        if direction.find("q")!= -1:
             self.stopMotors()
             # counter = 3
             print("Quit")
-        elif (direction.encode('utf-8') == b'w'):
+        elif (direction.find("w") != -1):
             # if (counter == 1):
             self.initializeFront()
                 # counter += 1
             print("Front")
             self.moveStraight(SPEEDL)
-        elif (direction.encode('utf-8') == "x"):
+        elif ("x" is direction):
             # if (counter == 1):
             self.initializeBack()
                 # counter += 1
             print("Back")
             self.moveStraight(SPEEDL)
-        elif (direction.decode('utf-8') == b'a'):
+        elif ("a" in direction):
             self.turnLeft(SPEEDL)
             # counter = 3
             print("Left")
-        elif (direction.decode('utf-8') == 'd'):
+        elif ("d" in direction.decode('utf-8')):
             self.turnRight(SPEEDL)
             # counter = 3
             print("Right")
-        elif (direction.decode('utf-8') == "s"):
+        elif ("s" in direction.decode('utf-8')):
             self.idleMotors
             # counter = 3
             print("Stop")
 
-
+        d
 
 
 if __name__ == "__main__":

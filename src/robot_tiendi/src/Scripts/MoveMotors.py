@@ -11,8 +11,9 @@ import math
 #from tf.transformations import euler_from_quaternion
 #from geometry_msgs.msg import Point, Twist
 
-SPEEDL = 80
-SPEEDR = SPEEDL
+SPEEDL = 90
+SPEEDR = 85
+speedTurn = 60
 
 
 class MoveMotors():
@@ -24,9 +25,9 @@ class MoveMotors():
  #       rospy.init_node("move_motors", anonymous=True)
         # Publisher which will publish to the topic '/cmd_vel'.
         self.mode = GPIO.getmode()
-        self.LeftMotorN = 26
+        self.LeftMotorN = 19
         self.pwmL = 13
-        self.LeftMotorP = 19
+        self.LeftMotorP = 26
         self.RightMotorP = 20
         self.pwmR = 21
         self.RightMotorN = 16
@@ -89,11 +90,11 @@ class MoveMotors():
 
 
     def turnRight(self, speed):
-        self.set('L', speed)
+        self.set('L', speedTurn)
         self.set('R', 0)
 
     def turnLeft(self, speed):
-        self.set('R', speed)
+        self.set('R', speedTurn)
         self.set('L', 0)
 
     def diag(self, direction, speed):

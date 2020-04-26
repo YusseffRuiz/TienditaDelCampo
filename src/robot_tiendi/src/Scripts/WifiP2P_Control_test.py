@@ -9,7 +9,7 @@ from MoveMotors import MoveMotors
 
 
 
-HOST = "192.168.15.16"
+HOST = "192.168.0.8"
 PORT = 8888
 SPEEDL = 180
 SPEEDR = SPEEDL

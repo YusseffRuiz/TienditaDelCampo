@@ -34,7 +34,7 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 
 
 def enablingP2P():
-    command = shlex.split("sudo ifconfig 192.168.15.16 netmask 255.255.255.0")
+    command = shlex.split("sudo ifconfig wlan0 192.168.15.16 netmask 255.255.255.0")
     p = subprocess.Popen(command, stdout=subprocess.PIPE)
     output, err = p.communicate()
     print("***New IP = 192.168.15.16")

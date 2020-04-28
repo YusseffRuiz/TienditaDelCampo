@@ -11,9 +11,9 @@ import math
 #from tf.transformations import euler_from_quaternion
 #from geometry_msgs.msg import Point, Twist
 
-SPEEDL = 85
-SPEEDR = 90
-speedTurn = 50
+SPEEDL = 70
+SPEEDR = 80
+speedTurn = 95
 
 
 class MoveMotors():
@@ -55,21 +55,37 @@ class MoveMotors():
                 self.MotorLeftSpeed.ChangeDutyCycle(0)
             for i in range(value):
                 self.MotorLeftSpeed.ChangeDutyCycle(i)
+		if(i<40):
+			self.MotorRightSpeed.ChangeDutyCycle(i)
         elif(direction == 'R'):
             if (value == 0):
                 self.MotorRightSpeed.ChangeDutyCycle(0)
             for i in range(value):
                 self.MotorRightSpeed.ChangeDutyCycle(i)
+		if(i<40):
+			self.MotorLeftSpeed.ChangeDutyCycle(i)
 
+    def setSlow(self, speed):
+	for i in range(speed):
+		self.MotorLeftSpeed.ChangeDutyCycle(i)
+		self.MotorRightSpeed.ChangeDutyCycle(i)
+		time.sleep(0.02)
 
-    def setSpeed(self, speed):
+    def setSpeed(self, speedL, speedR):
+	if(speedR>speedL):
+	   speed = speedR
+	else:
+	   speed = speedL
         if(speed == 0):
             self.MotorLeftSpeed.ChangeDutyCycle(0)
             self.MotorRightSpeed.ChangeDutyCycle(0)
         else:
             for i in range(speed):
-                self.MotorLeftSpeed.ChangeDutyCycle(i)
-                self.MotorRightSpeed.ChangeDutyCycle(i)
+		if(i<=speedL):
+                	self.MotorLeftSpeed.ChangeDutyCycle(i)
+		if(i<=speedR):
+                	self.MotorRightSpeed.ChangeDutyCycle(i)
+		time.sleep(0.015)
 
     def initializeFront(self):
         GPIO.output(self.RightMotorP, GPIO.HIGH)
@@ -85,16 +101,16 @@ class MoveMotors():
         GPIO.output(self.LeftMotorP, GPIO.LOW)
         # print("Moving Backwards")
 
-    def moveStraight(self, speed):
-        self.setSpeed(speed)
+    def moveStraight(self, speedL, speedR):
+        self.setSpeed(speedL, speedR)
 
 
     def turnRight(self, speed):
-        self.set('L', speedTurn)
+        self.set('L', speed)
         self.set('R', 0)
 
     def turnLeft(self, speed):
-        self.set('R', speedTurn)
+        self.set('R', speed)
         self.set('L', 0)
 
     def diag(self, direction, speed):
@@ -105,9 +121,9 @@ class MoveMotors():
 
     def idleMotors(self):
         self.initializeFront()
-        self.setSpeed(10)
+        self.setSpeed(10,10)
         time.sleep(0.2)
-        self.setSpeed(0)
+        self.setSpeed(0, 0)
 
 
     def stopMotors(self):
@@ -142,19 +158,20 @@ class MoveMotors():
             self.initializeFront()
                 # counter += 1
             print("Front")
-            self.moveStraight(SPEEDL)
+	    #self.setSlow(70)
+            self.moveStraight(SPEEDL, SPEEDR)
         elif (direction.find("x") != -1):
             # if (counter == 1):
             self.initializeBack()
                 # counter += 1
             print("Back")
-            self.moveStraight(SPEEDL)
+            self.setSlow(55)
         elif (direction.find("a") != -1):
-            self.turnLeft(SPEEDL)
+            self.turnLeft(speedTurn)
             # counter = 3
             print("Left")
         elif (direction.find("d") != -1):
-            self.turnRight(SPEEDL)
+            self.turnRight(speedTurn)
             # counter = 3
             print("Right")
         elif (direction.find("s") != -1):

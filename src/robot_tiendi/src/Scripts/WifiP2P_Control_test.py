@@ -2,14 +2,15 @@ import socket
 import subprocess
 import SocketServer
 import threading
-
+import shlex
+import time
 
 
 from MoveMotors import MoveMotors
 
 
 
-HOST = "192.168.0.8"
+HOST = "192.168.15.16"
 PORT = 8888
 SPEEDL = 180
 SPEEDR = SPEEDL
@@ -32,6 +33,16 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 
 
 
+def enablingP2P():
+    command = shlex.split("sudo ifconfig 192.168.15.16 netmask 255.255.255.0")
+    p = subprocess.Popen(command, stdout=subprocess.PIPE)
+    output, err = p.communicate()
+    print("***New IP = 192.168.15.16")
+    print(output)
+    time.sleep(1)
+    command = shlex.split("sudo systemctl restart networking.service")
+    p = subprocess.Popen(command, stdout=subprocess.PIPE)
+    print(output)
 
 def cmd_p2p_pi(cmd):
     command = "p2p_" + cmd
@@ -47,6 +58,7 @@ def start_server_program(server_socket):
 
 
 if __name__ == "__main__":
+    enablingP2P()
     cmd_p2p_pi("find")
     try:
         server_socket = SocketServer.TCPServer((HOST, PORT), MyTCPHandler)
